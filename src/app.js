@@ -40,36 +40,14 @@ const muMiddleware=(req,res,next)=>{
 
 var token;
 
-app.get('/setcookie',muMiddleware, function (req, res) {
-     // Cookies that have not been signed
-      token=jwt.sign({
-          uname: 'rohit'
-        }, "process.env.SECRET", { expiresIn: '5m' });
 
-        console.log(token);
-        
-    res.cookie('Goutam',token).send("cookie created")
-   })
-app.get('/getcookie', function (req, res) {
-     // Cookies that have not been signed
-     var decoded = jwt.verify(token, "process.env.SECRET");
-     console.log(`decoded token is ${decoded.uname}`) 
-     if(decoded.uname=='rohit'){
-          res.render('home',{uname:decoded.uname})
-     }
-//     res.send(req.cookies)
-   })
-   
-   app.get('/clearcooki', function (req, res) {
-    res.clearCookie('Goutam').send('succssefull logout')
-   })
 
 app.get('/',(req,res)=>{
      res.send("hello from goutam gurjar");
 })
-app.get('/login',(req,res)=>{
-     res.render('singin');
-})
+// app.get('/login',(req,res)=>{
+//      res.render('singin');
+// })
 // app.get('/signup',(req,res)=>{
 //      res.render('signup')
 // })
