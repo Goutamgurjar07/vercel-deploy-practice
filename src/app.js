@@ -11,10 +11,10 @@ const bodyParser=require('body-parser')
 const bcrypt=require('bcrypt')
 var cookieParser = require('cookie-parser')
 
-dotenv.config({path:'./.env'})
+// dotenv.config({path:'./.env'})
 
-console.log('mongo db path',process.env.MONGO_URL);
-console.log('secret key',process.env.SECRET);
+// console.log('mongo db path',process.env.MONGO_URL);
+// console.log('secret key',process.env.SECRET);
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -44,7 +44,7 @@ app.get('/setcookie',muMiddleware, function (req, res) {
      // Cookies that have not been signed
       token=jwt.sign({
           uname: 'rohit'
-        }, process.env.SECRET, { expiresIn: '5m' });
+        }, "process.env.SECRET", { expiresIn: '5m' });
 
         console.log(token);
         
@@ -52,7 +52,7 @@ app.get('/setcookie',muMiddleware, function (req, res) {
    })
 app.get('/getcookie', function (req, res) {
      // Cookies that have not been signed
-     var decoded = jwt.verify(token, process.env.SECRET);
+     var decoded = jwt.verify(token, "process.env.SECRET");
      console.log(`decoded token is ${decoded.uname}`) 
      if(decoded.uname=='rohit'){
           res.render('home',{uname:decoded.uname})
